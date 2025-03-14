@@ -1,17 +1,25 @@
 <script setup>
-    import { ref } from 'vue';
+    import { nextTick, ref } from 'vue';
     console.info(`Load Component`);
     let counter = ref({
         count: 0,
         name: "sendy"
     });
 
-    function incremenet(){
+    async function incremenet(){
         console.info(`Increment counter : ${counter.value.count}`);
         counter.value = {
             name: counter.value.name,
             count: counter.value.count + 1
         }
+
+        await nextTick();
+        counter.value.count++;
+        await nextTick();
+        counter.value.count++;
+        await nextTick();
+        
+        console.log("Increment count after nextTrick");
     }
 </script>
 
