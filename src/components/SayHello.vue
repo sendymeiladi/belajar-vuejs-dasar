@@ -18,20 +18,25 @@ const fullName = computed((oldName) => {
 
 const counter = ref(0);
 
-function incremenet(){
-    console.log(`increment called`);
-    counter.value++;
+
+function changeFirstName(event){
+    person.firstName = event.target.value;
 }
 
+function changeLastName(){
+    person.lastName = event.target.value;
+}
 </script>
 
 <template>
-    <div>
-        <button v-on:click="incremenet">Increment {{ counter }}</button> <br>
-        <input placeholder="First Name" type="text" id="firstName"> <br>
-        <input placeholder="Last Name" type="text" id="lastName"> <br>
-        <button v-on:click="sayHello">Say Hello</button>
-    </div>
+    <form>
+        <div>
+            <button v-on:click="counter++">Increment {{ counter }}</button> <br>
+            <input placeholder="First Name" type="text" id="firstName" v-on:input="changeFirstName"> <br>
+            <input placeholder="Last Name" type="text" id="lastName" @input="changeLastName"> <br>
+            <button v-on:click.prevent="sayHello">Say Hello</button>
+        </div>
+    </form>
     <h1>Hello {{ fullName }}</h1>
 </template>
 
