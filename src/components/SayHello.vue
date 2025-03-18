@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue';
+import { computed, reactive, ref } from 'vue';
 
 const person = reactive({
     firstName : "",
@@ -11,16 +11,28 @@ function sayHello(){
     person.lastName = document.getElementById("lastName").value;
 }
 
+const fullName = computed((oldName) => {
+    console.log(`change old name ${oldName}`);
+    return `${person.firstName} ${person.lastName}`
+})
+
+const counter = ref(0);
+
+function incremenet(){
+    console.log(`increment called`);
+    counter.value++;
+}
+
 </script>
 
 <template>
     <div>
+        <button v-on:click="incremenet">Increment {{ counter }}</button> <br>
         <input placeholder="First Name" type="text" id="firstName"> <br>
         <input placeholder="Last Name" type="text" id="lastName"> <br>
         <button v-on:click="sayHello">Say Hello</button>
     </div>
-
-    <h1>Hello {{ person.firstName }} {{ person.lastName }}</h1>
+    <h1>Hello {{ fullName }}</h1>
 </template>
 
 <style scoped>
