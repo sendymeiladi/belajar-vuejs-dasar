@@ -1,8 +1,11 @@
 <script setup>
     import { nextTick, ref } from 'vue';
+
+    const props = defineProps(["name", "initialCounter"]);
+
     console.info(`Load Component`);
     let counter = ref({
-        count: 0,
+        count: Number(props.initialCounter),
         name: "sendy"
     });
 
@@ -25,7 +28,7 @@
 
 <template>
     <div>
-        <h1 id="count">Counter : {{ counter.count }}</h1>
+        <h1 id="count">Counter {{ props.name }} : {{ counter.count }}</h1>
         <button v-on:click="incremenet">incremenet</button>
     </div>
 </template>
